@@ -4,45 +4,30 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    public float speed;
-    float xInput , zInput ;
-    public GameObject cam1, cam2, cam3, cam4;
+    public float speed = 6.0F;
+    public float jumpSpeed = 8.0F;
+    public float gravity = 20.0F;
 
-    void Start()
-    {
-        Time.timeScale = 1f;
-    }
+    // Drag & Drop the camera in this field, in the inspector
+
+    public Transform cameraTransform;
+    private Vector3 moveDirection = Vector3.zero;
 
     void Update()
     {
-        xInput = Input.GetAxis("Horizontal");
-        zInput = Input.GetAxis("Vertical");
-        transform.position = new Vector3(transform.position.x + xInput*speed, transform.position.y, transform.position.z + zInput*speed);
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = cameraTransform.TransformDirection(moveDirection);
+            moveDirection *= speed;
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            cam2.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                cam3.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    cam4.SetActive(true);
-                }
-            }
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpSpeed;
         }
-        
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            cam2.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                cam3.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    cam4.SetActive(true);
-                }
-            }
-        }
+
+        moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
     }
 }
+

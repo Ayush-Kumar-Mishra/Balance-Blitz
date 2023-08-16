@@ -7,6 +7,8 @@ TagManager:
   - Restrict
   - Diamond
   - Heart
+  - Wall
+  - Obs1
   layers:
   - Default
   - TransparentFX
