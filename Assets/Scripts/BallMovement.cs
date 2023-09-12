@@ -4,30 +4,46 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    public float speed = 6.0F;
-    public float jumpSpeed = 8.0F;
-    public float gravity = 20.0F;
+    public float moveSpeed = 5f;
+    public float jumpForce = 7f;
+    private Rigidbody rb;
 
-    // Drag & Drop the camera in this field, in the inspector
-
-    public Transform cameraTransform;
-    private Vector3 moveDirection = Vector3.zero;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
-        CharacterController controller = GetComponent<CharacterController>();
-        if (controller.isGrounded)
-        {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDirection = cameraTransform.TransformDirection(moveDirection);
-            moveDirection *= speed;
+        // Movement on PC
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
-            if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;
+        // Movement on Android
+        float touchHorizontalInput = Input.acceleration.x;
+        float touchVerticalInput = Input.acceleration.y;
+
+        Vector3 movement;
+
+        if (Mathf.Abs(touchHorizontalInput) > 0.1f || Mathf.Abs(touchVerticalInput) > 0.1f)
+        {
+            // Use accelerometer input on Android if it's significant
+            movement = new Vector3(touchHorizontalInput, 0, touchVerticalInput);
+        }
+        else
+        {
+            // Use keyboard input on PC
+            movement = new Vector3(horizontalInput, 0, verticalInput);
         }
 
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
+        // Apply movement to the Rigidbody
+        rb.velocity = new Vector3(movement.x * moveSpeed, rb.velocity.y, movement.z * moveSpeed);
+
+        // Jumping
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 }
 
