@@ -7,7 +7,6 @@ public class BallMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     private Rigidbody rb;
-    private bool isGrounded;
 
     void Start()
     {
@@ -16,8 +15,6 @@ public class BallMovement : MonoBehaviour
 
     void Update()
     {
-
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
 
         // Movement on PC
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -44,7 +41,7 @@ public class BallMovement : MonoBehaviour
         rb.velocity = new Vector3(movement.x * moveSpeed, rb.velocity.y, movement.z * moveSpeed);
 
         // Jumping
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }

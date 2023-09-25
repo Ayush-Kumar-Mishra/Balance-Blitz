@@ -9,6 +9,8 @@ TagManager:
   - Heart
   - Wall
   - Obs1
+  - Start_Txt
+  - End_Txt
   layers:
   - Default
   - TransparentFX
