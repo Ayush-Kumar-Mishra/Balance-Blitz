@@ -8,6 +8,8 @@ public class BallMovement : MonoBehaviour
     public float jumpForce = 7f;
     private Rigidbody rb;
 
+    public static bool isGrounded;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,7 +43,7 @@ public class BallMovement : MonoBehaviour
         rb.velocity = new Vector3(movement.x * moveSpeed, rb.velocity.y, movement.z * moveSpeed);
 
         // Jumping
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump")/* & isGrounded*/)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
