@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 788747732899012433}
   m_Layer: 0
   m_Name: CapsuleObs
-  m_TagString: Untagged
+  m_TagString: Obs1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,7 +160,7 @@ Transform:
   - {fileID: 1758751665508951652}
   - {fileID: 7947001138559660501}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5922907547742636764
 GameObject:

@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 public class LevelScript : MonoBehaviour
 {
     public int currentLevel;
+    public GameObject allLevels;
+    public GameObject mainScreen;
+
+    public void MainMenu()
+    {
+       SceneManager.LoadScene(0);
+    }
 
     public void StartGame()
     {
@@ -23,9 +30,16 @@ public class LevelScript : MonoBehaviour
         SceneManager.LoadScene(currentLevel+1);
     }
     
-    public void MainMenu()
+    public void DiffLevels()
     {
-        SceneManager.LoadScene(0);
+        allLevels.gameObject.SetActive(true);
+        mainScreen.gameObject.SetActive(false);
+    }
+    
+    public void backLevels()
+    {
+        allLevels.gameObject.SetActive(false);
+        mainScreen.gameObject.SetActive(true);
     }
 
     public void QuitGame()

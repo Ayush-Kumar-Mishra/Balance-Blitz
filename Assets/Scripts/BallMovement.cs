@@ -9,6 +9,9 @@ public class BallMovement : MonoBehaviour
     private Rigidbody rb;
 
     public static bool isGrounded;
+    public GameObject nextLevelImg;
+    public GameObject player;
+
 
     void Start()
     {
@@ -47,6 +50,40 @@ public class BallMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Diamond" || other.gameObject.tag == "Start_Txt" || other.gameObject.tag == "End_Txt")
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Finish")
+        {
+            nextLevelImg.gameObject.SetActive(true);
+            Destroy(player.gameObject);
+        }
+
+        if(collision.gameObject.tag == "Restrict")
+        {
+            Destroy(this.gameObject);
+        }
+
+        if(collision.gameObject.tag == "Obs1")
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return null;
     }
 }
 

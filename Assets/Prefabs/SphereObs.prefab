@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8061406177442479544}
   m_Layer: 0
   m_Name: Capsule1
-  m_TagString: Untagged
+  m_TagString: Obs1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5719934946138994481}
   m_Layer: 0
   m_Name: Capsule4
-  m_TagString: Untagged
+  m_TagString: Obs1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 3232107974043017157}
   m_Layer: 0
   m_Name: SphereObs
-  m_TagString: Untagged
+  m_TagString: Obs1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 3449558670574534264}
   m_Layer: 0
   m_Name: Capsule3
-  m_TagString: Untagged
+  m_TagString: Obs1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 2020050693374760232}
   m_Layer: 0
   m_Name: Capsule2
-  m_TagString: Untagged
+  m_TagString: Obs1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
