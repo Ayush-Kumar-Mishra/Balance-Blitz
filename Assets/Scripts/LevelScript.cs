@@ -6,8 +6,15 @@ using UnityEngine.SceneManagement;
 public class LevelScript : MonoBehaviour
 {
     public int currentLevel;
+    public static int currLevel;
     public GameObject allLevels;
     public GameObject mainScreen;
+
+    private void Start()
+    {
+        currLevel = currentLevel;
+    }
+
 
     public void MainMenu()
     {

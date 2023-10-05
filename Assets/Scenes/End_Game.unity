@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17c58e1590ca95458e966b2f7316ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 6
+  currentLevel: 11
   allLevels: {fileID: 0}
   mainScreen: {fileID: 0}
 --- !u!1 &561804538
@@ -747,7 +747,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 453641258}
         m_TargetAssemblyTypeName: LevelScript, Assembly-CSharp
-        m_MethodName: Restart
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

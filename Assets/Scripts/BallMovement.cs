@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     private Rigidbody rb;
+    public int diamondCount;
 
     public static bool isGrounded;
     public GameObject nextLevelImg;
     public GameObject player;
+
+    public GameObject[] lifeHeart;
+    public GameObject[] lossHeart;
+    int lifeCount=5;
+
+    public GameObject lostScreen;
 
 
     void Start()
@@ -51,6 +59,16 @@ public class BallMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
+        for (int i = 5; lifeCount < i;i--)
+        {
+            Destroy(lifeHeart[i]);
+            lossHeart[i].SetActive(true);
+        }
+        if (lifeCount < 1)
+        {
+            Time.timeScale = 0;
+            lostScreen.SetActive(true);
+        }
         
     }
 
@@ -60,11 +78,16 @@ public class BallMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+        
+        if (other.gameObject.tag == "Diamond")
+        {
+            CollectablesCount.score++;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Finish")
+        if (collision.gameObject.tag == "Finish" & diamondCount==CollectablesCount.score)
         {
             nextLevelImg.gameObject.SetActive(true);
             Destroy(player.gameObject);
@@ -72,18 +95,22 @@ public class BallMovement : MonoBehaviour
 
         if(collision.gameObject.tag == "Restrict")
         {
-            Destroy(this.gameObject);
+            lifeCount--;
+            player.gameObject.SetActive(false);
         }
 
         if(collision.gameObject.tag == "Obs1")
         {
-            Destroy(this.gameObject);
+            lifeCount--;
+            player.gameObject.SetActive(false);
         }
     }
-
+/*
     IEnumerator Respawn()
     {
-        yield return null;
-    }
+        yield return new WaitForSeconds(1f);
+        player.gameObject.SetActive(true);
+        SceneManager.LoadScene(LevelScript.currLevel);
+    }*/
 }
 

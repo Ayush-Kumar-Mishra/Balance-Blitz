@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    public Transform groundCheck; // Reference to the ground check point
+    public LayerMask groundLayer; // Layer(s) to consider as ground
+
+    private Rigidbody rb;
+    private bool isGrounded;
+
+    private void Start()
     {
-        if(collision.gameObject.tag == "Ground")
-        {
-            BallMovement.isGrounded = true;
-        }
+        rb = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void Update()
     {
-        if (collision.gameObject.tag == "Ground")
+        // Perform the ground check
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.1f, groundLayer);
+    }
+
+    private void FixedUpdate()
+    {
+        // Perform physics-based actions here
+        if (isGrounded)
         {
-            BallMovement.isGrounded = false;
+            // The ball is grounded, you can apply jumping or other actions here
         }
     }
 }
