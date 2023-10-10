@@ -13,6 +13,7 @@ public class BallMovement : MonoBehaviour
     public static bool isGrounded;
     public GameObject nextLevelImg;
     public GameObject player;
+    public GameObject playerAgain;
 
     public GameObject[] lifeHeart;
     public GameObject[] lossHeart;
@@ -96,7 +97,8 @@ public class BallMovement : MonoBehaviour
         if(collision.gameObject.tag == "Restrict")
         {
             lifeCount--;
-            player.gameObject.SetActive(false);
+            StartCoroutine(Respawn());/*
+            player.gameObject.SetActive(false);*/
         }
 
         if(collision.gameObject.tag == "Obs1")
@@ -105,12 +107,11 @@ public class BallMovement : MonoBehaviour
             player.gameObject.SetActive(false);
         }
     }
-/*
+
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(1f);
-        player.gameObject.SetActive(true);
-        SceneManager.LoadScene(LevelScript.currLevel);
-    }*/
+        Instantiate(playerAgain ,transform.position + new Vector3(0,0,-1) , Quaternion.identity);
+    }
 }
 
