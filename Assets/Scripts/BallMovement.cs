@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BallMovement : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class BallMovement : MonoBehaviour
     public GameObject player;
     public GameObject playerAgain;
 
-    public GameObject[] lifeHeart;
-    public GameObject[] lossHeart;
-    int lifeCount=5;
+    public int lifeCount=5;
+    public Image[] Hearts;
+    public Sprite redHeart;
+    public Sprite emptyHeart;
+
+    public GameObject damageIndicator;
+    
 
     public GameObject lostScreen;
 
@@ -25,6 +30,7 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Time.timeScale = 1f;
     }
 
     void Update()
@@ -60,18 +66,17 @@ public class BallMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        for (int i = 5; lifeCount < i;i--)
+        foreach (Image img in Hearts)
         {
-            Destroy(lifeHeart[i]);
-            lossHeart[i].SetActive(true);
+            img.sprite = emptyHeart;
         }
-        if (lifeCount < 1)
+        for (int i = 0; i < lifeCount; i++)
         {
-            Time.timeScale = 0;
-            lostScreen.SetActive(true);
+            Hearts[i].sprite = redHeart;
         }
-        
+
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -97,21 +102,41 @@ public class BallMovement : MonoBehaviour
         if(collision.gameObject.tag == "Restrict")
         {
             lifeCount--;
-            StartCoroutine(Respawn());/*
-            player.gameObject.SetActive(false);*/
+            StartCoroutine(DamageIndicate());
+            if (lifeCount <= 0)
+            {
+                Time.timeScale = 0f;
+                lostScreen.SetActive(true);
+            }
+            StartCoroutine(Respawn());
         }
 
         if(collision.gameObject.tag == "Obs1")
         {
             lifeCount--;
-            player.gameObject.SetActive(false);
+            StartCoroutine(DamageIndicate());
+            if (lifeCount <= 0)
+            {
+                Time.timeScale = 0f;
+                lostScreen.SetActive(true);
+            }
         }
     }
 
     IEnumerator Respawn()
     {
+        Instantiate(playerAgain ,new Vector3(0,0,-1) , Quaternion.identity);
         yield return new WaitForSeconds(1f);
-        Instantiate(playerAgain ,transform.position + new Vector3(0,0,-1) , Quaternion.identity);
+        /*Destroy(player.gameObject );*/
     }
+    
+    IEnumerator DamageIndicate()
+    {
+        damageIndicator.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        damageIndicator.gameObject.SetActive(false);
+    }
+
+    
 }
 

@@ -127,19 +127,16 @@ MonoBehaviour:
   diamondCount: 1
   nextLevelImg: {fileID: 0}
   player: {fileID: 2423083892071127423}
-  playerAgain: {fileID: 0}
-  lifeHeart:
+  playerAgain: {fileID: 2423083892071127423}
+  lifeCount: 5
+  Hearts:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  lossHeart:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  redHeart: {fileID: 21300000, guid: 41eda1461002eba4a87c823615bf272b, type: 3}
+  emptyHeart: {fileID: 21300000, guid: aa7ed9bf8074a9d4f8cbb9e8fdc4c72d, type: 3}
   lostScreen: {fileID: 0}
 --- !u!114 &2069278499063815478
 MonoBehaviour:
