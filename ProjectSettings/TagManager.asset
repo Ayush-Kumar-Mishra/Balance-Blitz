@@ -11,6 +11,8 @@ TagManager:
   - Start_Txt
   - End_Txt
   - Ground
+  - Temp_Platform
+  - Destroyed_Platform
   layers:
   - Default
   - TransparentFX

@@ -121,6 +121,17 @@ public class BallMovement : MonoBehaviour
                 lostScreen.SetActive(true);
             }
         }
+        
+        if(collision.gameObject.tag == "Temp_Platform")
+        {
+            StartCoroutine(TempPlatform());
+            Destroy(collision.gameObject);
+        }
+        
+        if(collision.gameObject.tag == "Destroyed_Platform")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     IEnumerator Respawn()
@@ -137,6 +148,9 @@ public class BallMovement : MonoBehaviour
         damageIndicator.gameObject.SetActive(false);
     }
 
-    
+    IEnumerator TempPlatform()
+    {
+        yield return new WaitForSeconds(4f);
+    }
 }
 
