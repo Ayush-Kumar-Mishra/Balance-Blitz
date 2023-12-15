@@ -9,6 +9,8 @@ public class LevelScript : MonoBehaviour
     public static int currLevel;
     public GameObject allLevels;
     public GameObject mainScreen;
+    public GameObject pauseBtn;
+    public GameObject pauseImg;
 
     private void Start()
     {
@@ -41,6 +43,19 @@ public class LevelScript : MonoBehaviour
     {
         allLevels.gameObject.SetActive(true);
         mainScreen.gameObject.SetActive(false);
+    }
+    
+    public void PauseLevel()
+    {
+        Time.timeScale = 0;
+        pauseBtn.SetActive(false);
+        pauseImg.SetActive(true);
+    }
+    public void PlayLevel()
+    {
+        Time.timeScale = 1;
+        pauseBtn.SetActive(true);
+        pauseImg.SetActive(false);
     }
     
     public void backLevels()

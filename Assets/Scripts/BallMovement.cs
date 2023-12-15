@@ -26,10 +26,18 @@ public class BallMovement : MonoBehaviour
 
     public GameObject lostScreen;
 
+    public List<GameObject> reSpawnPoints;
+
+    public Vector3 sP;
+    bool collided;
+
+    public Vector3 initialPos;
+    public Vector3 posExtend;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        collided = false;
         Time.timeScale = 1f;
     }
 
@@ -122,23 +130,45 @@ public class BallMovement : MonoBehaviour
             }
         }
         
-        if(collision.gameObject.tag == "Temp_Platform")
-        {
-            StartCoroutine(TempPlatform());
-            Destroy(collision.gameObject);
-        }
         
         if(collision.gameObject.tag == "Destroyed_Platform")
         {
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject == reSpawnPoints[0])
+        {
+            sP = reSpawnPoints[0].transform.position;
+            collided = true;
+        }
+
+        if (collision.gameObject == reSpawnPoints[1])
+        {
+            sP = reSpawnPoints[1].transform.position;
+            collided = true;
+        }
+        
+        if (collision.gameObject == reSpawnPoints[2])
+        {
+            sP = reSpawnPoints[2].transform.position;
+            collided = true;
+        }
+
+        if (collision.gameObject.tag == "Restrict" && collided == true)
+        {
+            StartCoroutine (Respawn());
+        }
+        
+        if (collision.gameObject.tag == "Restrict" && collided == false)
+        {
+            transform.position = initialPos;
+        }
     }
 
     IEnumerator Respawn()
     {
-        Instantiate(playerAgain ,new Vector3(0,0,-1) , Quaternion.identity);
         yield return new WaitForSeconds(1f);
-        /*Destroy(player.gameObject );*/
+        transform.position = sP + posExtend;
     }
     
     IEnumerator DamageIndicate()
@@ -148,9 +178,5 @@ public class BallMovement : MonoBehaviour
         damageIndicator.gameObject.SetActive(false);
     }
 
-    IEnumerator TempPlatform()
-    {
-        yield return new WaitForSeconds(4f);
-    }
 }
 

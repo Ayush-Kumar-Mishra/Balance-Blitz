@@ -526,6 +526,8 @@ MonoBehaviour:
   currentLevel: 11
   allLevels: {fileID: 0}
   mainScreen: {fileID: 0}
+  pauseBtn: {fileID: 0}
+  pauseImg: {fileID: 0}
 --- !u!1 &561804538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1442,7 @@ GameObject:
   - component: {fileID: 1940579554}
   - component: {fileID: 1940579553}
   - component: {fileID: 1940579556}
+  - component: {fileID: 1940579557}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1542,3 +1545,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1940579557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940579552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c55cf58f06a9d14891098f0aa3c9ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

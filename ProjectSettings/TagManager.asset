@@ -13,6 +13,8 @@ TagManager:
   - Ground
   - Temp_Platform
   - Destroyed_Platform
+  - Pos1
+  - Pos2
   layers:
   - Default
   - TransparentFX
